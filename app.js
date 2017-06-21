@@ -40,6 +40,12 @@ Game.prototype.getPlayerInput = function(player) {
           this.board = [['', '', ''], ['', '', ''], ['', '', '']];
           // winners start
           this.nextRound(player);
+        } else if (this.checkForTie()) {
+          this.displayBoard();
+          console.log('Cats game! Lets wipe the board clean');
+          this.board = [['', '', ''], ['', '', ''], ['', '', '']];
+          this.displayBoard();
+          this.nextRound(player);
         } else {
           // switch players and getPlayerInput with the other player now
           if (player === this.player1) {
@@ -128,6 +134,24 @@ Game.prototype.checkForWin = function(player) {
   // check if we have column wins
   // check if we have left diagonal win
   // check if we have right diagonal win
+};
+
+Game.prototype.checkForTie = function() {
+  var counter = 0;
+  for (let i = 0; i < 3; i++) {
+    for (let k = 0; k < 3; k++) {
+      if (this.board[i][k] !== '') {
+        counter++;
+      }
+    }
+  }
+
+  if (counter === 9) {
+    return true;
+  } else {
+    return false;
+  }
+
 };
 
 const game = new Game();
